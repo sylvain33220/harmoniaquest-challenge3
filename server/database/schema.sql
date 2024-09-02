@@ -20,7 +20,7 @@ create table program (
   id int auto_increment primary key not null,
   title varchar(255),
   synopsis text,
-  poster varchar(100),
+  poster varchar(255),
   country varchar(100),
   year int,
   category_id int
