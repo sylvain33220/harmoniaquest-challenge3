@@ -21,12 +21,19 @@ const programs = [
     },
   ];
 
-const browse =  (req,res ) => {
-  // const programsFromDB = await tables.programs.readAll();
+const browse = (req,res) => {
+  if(req.query.q != null) {
+    const filteredPrograms = programs.filter((program) => 
+    program.synopsis.includes(req.query.q)
+    );
+
+    res.json(filteredPrograms);
+  } else {
     res.json(programs);
+  }
 };
 
-const read = async (req,res) => {
+const read =  (req,res) => {
   const parseId = parseInt(req.params.id,10);
 
   const program = programs.find((p) => p.id === parseId);
@@ -34,7 +41,7 @@ const read = async (req,res) => {
   if(program !=null) {
     res.json(program)
   } else {
-    res.sendStatus(404);
+    res.sendStatus(404)
   }
 }
 
